@@ -15,6 +15,27 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Luck & Loot - Dark and Darker Hub",
   description: "Community guides, patch notes, and more for Dark and Darker.",
+  openGraph: {
+    title: "Luck & Loot - Dark and Darker Hub",
+    description: "Community guides, patch notes, and more for Dark and Darker.",
+    url: "https://luckandloot.gg",
+    siteName: "Luck & Loot",
+    images: [
+      {
+        url: "/metatag_banner.png", // Relative to public/
+        width: 1200,
+        height: 630,
+        alt: "Luck & Loot - Dark and Darker Hub",
+      },
+    ],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Luck & Loot - Dark and Darker Hub",
+    description: "Community guides, patch notes, and more for Dark and Darker.",
+    images: ["/metatag_banner.png"],
+  },
 };
 
 export default function RootLayout({
