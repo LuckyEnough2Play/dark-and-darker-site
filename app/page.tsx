@@ -5,11 +5,22 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-[url('/wallpaper_home.png')] bg-center bg-cover text-white">
       <Navbar />
-      <div className="flex items-center justify-center min-h-[calc(100vh-6rem)]">
-        <div className="text-center p-8 bg-black/60 rounded">
-          <h1 className="text-4xl font-bold mb-4">Dark and Darker Community Hub</h1>
-          <p className="text-lg">
-            Welcome! This site offers guides, patch note reactions, and community-driven class builds.
+
+      {/* Title - Luck and Loot */}
+      <div className="flex justify-center pt-20">
+        <h1 className="text-7xl font-extrabold text-yellow-200 drop-shadow-lg tracking-wide text-center">
+          Luck and Loot
+        </h1>
+      </div>
+
+      {/* Subtitle and Description */}
+      <div className="flex justify-center mt-6">
+        <div className="text-center px-4 max-w-xl">
+          <h2 className="text-3xl font-semibold text-gray-200 mb-2">
+            A Dark and Darker Community Hub
+          </h2>
+          <p className="text-sm text-gray-200 leading-relaxed">
+            Discover player-built class guides, annotated patch reactions, and dungeon-tested survival tips — all forged in the depths of the Dark and Darker community.
           </p>
         </div>
       </div>

@@ -15,27 +15,40 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="bg-[#0a0f1c] text-gray-100 py-6 px-4 shadow-md border-b border-blue-700">
-      <ul className="flex flex-wrap justify-center gap-8 text-lg font-semibold tracking-wide">
-        {navItems.map(({ href, label }) => {
-          const isActive = pathname === href;
+    <nav className="bg-[url('/wallpaper_navbar.png')] bg-cover bg-[center_top_70%] text-gray-100 py-4 px-6 shadow-md border-b-6 border-blue-700">
+      <div className="w-full flex items-center justify-between px-6 bg-black/60 rounded">
+        {/* Left: Title */}
+        <div className="text-left">
+          <h1 className="text-xl font-bold text-yellow-200 leading-snug">
+            Luck and Loot
+          </h1>
+          <p className="text-sm text-gray-300">A Dark and Darker Community Hub</p>
+        </div>
 
-          return (
-            <li key={href}>
-              <Link
-                href={href}
-                className={`transition-colors ${
-                  isActive
-                    ? 'text-blue-400 underline underline-offset-4'
-                    : 'text-gray-100 hover:text-blue-300'
-                }`}
-              >
-                {label}
-              </Link>
-            </li>
-          );
-        })}
-      </ul>
+        {/* Center: Nav Links */}
+        <ul className="flex flex-wrap justify-center gap-6 text-md font-semibold tracking-wide">
+          {navItems.map(({ href, label }) => {
+            const isActive = pathname === href;
+            return (
+              <li key={href}>
+                <Link
+                  href={href}
+                  className={`transition-colors ${
+                    isActive
+                      ? 'text-blue-400 underline underline-offset-4'
+                      : 'text-gray-100 hover:text-blue-300'
+                  }`}
+                >
+                  {label}
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+
+        {/* Right: Spacer for balance */}
+        <div className="w-40" />
+      </div>
     </nav>
   );
 }
