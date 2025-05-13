@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     siteName: "Luck & Loot",
     images: [
       {
-        url: "/metatag_banner.png", // Relative to public/
+        url: "/metatag_banner.png",
         width: 1200,
         height: 630,
         alt: "Luck & Loot - Dark and Darker Hub",
