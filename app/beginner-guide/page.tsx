@@ -23,7 +23,7 @@ export default function BeginnerGuidePage() {
             <div className="bg-black/50 p-4 rounded-md shadow-md">
               <h2 className="text-2xl font-semibold text-yellow-300">Basic Controls</h2>
               <p className="text-sm">
-                Movement is WASD, use items with 1-4, and always check corners. This isn’t a safe world.
+                Movement is WASD, use items with 1-4, and always check corners. This isnt a safe world.
               </p>
             </div>
             <div className="bg-black/50 p-4 rounded-md shadow-md">
