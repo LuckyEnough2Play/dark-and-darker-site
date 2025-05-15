@@ -18,6 +18,7 @@ const FLAGS: Record<string, string> = {
 const TAGS = ['All', 'PvP', 'Arena', 'NA', 'EU'];
 
 export default function TwitchStreamList() {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [streams, setStreams] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedTag, setSelectedTag] = useState('All');
