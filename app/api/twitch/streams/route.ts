@@ -1,6 +1,6 @@
 export async function GET() {
   // Step 1: Get Twitch OAuth token
-  const tokenRes = await fetch('http://localhost:3000/api/twitch/token');
+  const tokenRes = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL || ''}/api/twitch/token`);
   const tokenData = await tokenRes.json();
   const accessToken = tokenData.access_token;
 
