@@ -26,16 +26,13 @@ const FLAGS: Record<string, string> = {
 
 export default function TwitchStreamList() {
   const [streams, setStreams] = useState<TwitchStream[]>([]);
-  const [loading, setLoading] = useState(true);
   const [selectedTag, setSelectedTag] = useState('All');
 
   const fetchStreams = () => {
-    setLoading(true);
     fetch('/api/twitch/streams')
       .then((res) => res.json())
       .then((data) => {
         setStreams(data.data || []);
-        setLoading(false);
       });
   };
 
@@ -56,7 +53,6 @@ export default function TwitchStreamList() {
     });
   });
 
-  // Sort tags by frequency
   const sortedTags = Object.entries(tagFrequency)
     .sort((a, b) => b[1] - a[1])
     .map(([tag, count]) => ({ tag, count }));
