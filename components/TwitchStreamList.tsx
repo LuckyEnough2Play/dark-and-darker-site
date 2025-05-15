@@ -18,7 +18,6 @@ const FLAGS: Record<string, string> = {
 const TAGS = ['All', 'PvP', 'Arena', 'NA', 'EU'];
 
 export default function TwitchStreamList() {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [streams, setStreams] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedTag, setSelectedTag] = useState('All');
@@ -26,8 +25,8 @@ export default function TwitchStreamList() {
   const fetchStreams = () => {
     setLoading(true);
     fetch('/api/twitch/streams')
-      .then(res => res.json())
-      .then(data => {
+      .then((res) => res.json())
+      .then((data) => {
         setStreams(data.data || []);
         setLoading(false);
       });
@@ -52,6 +51,12 @@ export default function TwitchStreamList() {
           stream.title.toLowerCase().includes(selectedTag.toLowerCase())
         );
 
+  // 🔧 Match local vs production domain for Twitch player security
+  const twitchParent =
+    typeof window !== 'undefined' && window.location.hostname === 'localhost'
+      ? 'localhost'
+      : 'www.luckandloot.gg';
+
   return (
     <section className="p-6 max-w-7xl mx-auto">
       <h2 className="text-3xl font-bold text-yellow-200 mb-6 text-center drop-shadow">
@@ -60,7 +65,7 @@ export default function TwitchStreamList() {
 
       {/* Tag filter bar */}
       <div className="flex justify-center gap-2 mb-6 flex-wrap">
-        {TAGS.map(tag => (
+        {TAGS.map((tag) => (
           <button
             key={tag}
             className={`px-3 py-1 text-sm rounded-full border transition ${
@@ -101,16 +106,14 @@ export default function TwitchStreamList() {
 
               {/* Thumbnail / live preview swap */}
               <div className="relative aspect-video w-full overflow-hidden">
-                {/* Thumbnail (default) */}
                 <img
                   src={stream.thumbnail_url.replace('{width}', '320').replace('{height}', '180')}
                   alt={`${stream.user_name}'s stream`}
                   className="absolute inset-0 w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-0"
                 />
-                {/* Iframe preview (on hover) */}
                 <iframe
                   className="absolute inset-0 w-full h-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
-                  src={`https://player.twitch.tv/?channel=${stream.user_name}&parent=luckandloot.gg&muted=true&autoplay=true`}
+                  src={`https://player.twitch.tv/?channel=${stream.user_name}&parent=${twitchParent}&muted=true&autoplay=true`}
                   allow="autoplay; fullscreen"
                   frameBorder="0"
                 />
