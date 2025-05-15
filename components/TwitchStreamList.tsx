@@ -60,11 +60,6 @@ export default function TwitchStreamList() {
           stream.title.toLowerCase().includes(selectedTag.toLowerCase())
         );
 
-  const twitchParent =
-    typeof window !== 'undefined'
-      ? encodeURIComponent(window.location.hostname)
-      : 'luckandloot.gg';
-
   return (
     <section className="p-6 max-w-7xl mx-auto">
       <h2 className="text-3xl font-bold text-yellow-200 mb-6 text-center drop-shadow">
