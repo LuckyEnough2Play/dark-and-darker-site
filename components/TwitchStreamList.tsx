@@ -61,8 +61,8 @@ export default function TwitchStreamList() {
         );
 
   const twitchParent =
-    typeof window !== 'undefined' && window.location.hostname === 'localhost'
-      ? 'localhost'
+    typeof window !== 'undefined'
+      ? encodeURIComponent(window.location.hostname)
       : 'luckandloot.gg';
 
   return (
@@ -71,7 +71,6 @@ export default function TwitchStreamList() {
         Live Dark and Darker Streams
       </h2>
 
-      {/* Tag filter bar */}
       <div className="flex justify-center gap-2 mb-6 flex-wrap">
         {TAGS.map((tag) => (
           <button
@@ -105,14 +104,12 @@ export default function TwitchStreamList() {
               rel="noreferrer"
               className="relative group bg-black/70 hover:bg-black/90 transition-all duration-300 rounded shadow-lg overflow-hidden border border-yellow-700 hover:shadow-yellow-400 hover:shadow-xl"
             >
-              {/* Top streamer badge */}
               {isTop && (
                 <div className="absolute top-0 left-0 bg-red-600 text-white text-xs font-bold px-2 py-1 z-10 animate-pulse">
                   TOP STREAMER
                 </div>
               )}
 
-              {/* Thumbnail / live preview swap */}
               <div className="relative aspect-video w-full overflow-hidden">
                 <img
                   src={stream.thumbnail_url.replace('{width}', '320').replace('{height}', '180')}
@@ -121,13 +118,12 @@ export default function TwitchStreamList() {
                 />
                 <iframe
                   className="absolute inset-0 w-full h-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
-                  src={`https://player.twitch.tv/?channel=${stream.user_name}&parent=${twitchParent}&muted=true&autoplay=true`}
+                  src={`https://player.twitch.tv/?channel=${stream.user_name}&parent=luckandloot.gg&parent=www.luckandloot.gg&muted=true&autoplay=true`}
                   allow="autoplay; fullscreen"
                   frameBorder="0"
                 />
               </div>
 
-              {/* Streamer info */}
               <div className="p-3">
                 <div className="flex justify-between items-center">
                   <div className="text-white font-bold truncate">
