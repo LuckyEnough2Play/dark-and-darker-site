@@ -1,6 +1,15 @@
 'use client';
 import { useEffect, useState } from 'react';
 
+interface TwitchStream {
+  id: string;
+  user_name: string;
+  viewer_count: number;
+  title: string;
+  thumbnail_url: string;
+  language: string;
+}
+
 const FLAGS: Record<string, string> = {
   en: '🇺🇸',
   fr: '🇫🇷',
@@ -18,7 +27,7 @@ const FLAGS: Record<string, string> = {
 const TAGS = ['All', 'PvP', 'Arena', 'NA', 'EU'];
 
 export default function TwitchStreamList() {
-  const [streams, setStreams] = useState<any[]>([]);
+  const [streams, setStreams] = useState<TwitchStream[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedTag, setSelectedTag] = useState('All');
 
@@ -51,11 +60,10 @@ export default function TwitchStreamList() {
           stream.title.toLowerCase().includes(selectedTag.toLowerCase())
         );
 
-  // 🔧 Match local vs production domain for Twitch player security
   const twitchParent =
     typeof window !== 'undefined' && window.location.hostname === 'localhost'
       ? 'localhost'
-      : 'www.luckandloot.gg';
+      : 'luckandloot.gg';
 
   return (
     <section className="p-6 max-w-7xl mx-auto">
