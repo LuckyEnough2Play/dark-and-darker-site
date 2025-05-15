@@ -24,8 +24,6 @@ const FLAGS: Record<string, string> = {
   zh: '🇨🇳',
 };
 
-const TAGS = ['All', 'PvP', 'Arena', 'NA', 'EU'];
-
 export default function TwitchStreamList() {
   const [streams, setStreams] = useState<TwitchStream[]>([]);
   const [loading, setLoading] = useState(true);
@@ -47,11 +45,24 @@ export default function TwitchStreamList() {
     return () => clearInterval(interval);
   }, []);
 
-  if (!loading && streams.length === 0) {
-    return <div className="text-center text-gray-400 mt-10">No live streams found.</div>;
-  }
+  // Build tag frequencies from titles
+  const tagFrequency: Record<string, number> = {};
+  streams.forEach((stream) => {
+    const words = stream.title.toLowerCase().split(/[\s\-_,.]+/);
+    words.forEach((word) => {
+      if (word.length > 2) {
+        tagFrequency[word] = (tagFrequency[word] || 0) + 1;
+      }
+    });
+  });
 
-  const topStreamerId = streams[0]?.id;
+  // Sort tags by frequency
+  const sortedTags = Object.entries(tagFrequency)
+    .sort((a, b) => b[1] - a[1])
+    .map(([tag, count]) => ({ tag, count }));
+
+  const topTags = sortedTags.slice(0, 3);
+  const otherTags = sortedTags.slice(3);
 
   const filteredStreams =
     selectedTag === 'All'
@@ -60,14 +71,28 @@ export default function TwitchStreamList() {
           stream.title.toLowerCase().includes(selectedTag.toLowerCase())
         );
 
+  const topStreamerId = streams[0]?.id;
+
   return (
     <section className="p-6 max-w-7xl mx-auto">
       <h2 className="text-3xl font-bold text-yellow-200 mb-6 text-center drop-shadow">
         Live Dark and Darker Streams
       </h2>
 
+      {/* Dynamic Tags */}
       <div className="flex justify-center gap-2 mb-6 flex-wrap">
-        {TAGS.map((tag) => (
+        <button
+          className={`px-3 py-1 text-sm rounded-full border transition ${
+            selectedTag === 'All'
+              ? 'bg-yellow-400 text-black font-bold'
+              : 'bg-black/70 text-white border-yellow-400 hover:bg-yellow-300 hover:text-black'
+          }`}
+          onClick={() => setSelectedTag('All')}
+        >
+          All
+        </button>
+
+        {topTags.map(({ tag, count }) => (
           <button
             key={tag}
             className={`px-3 py-1 text-sm rounded-full border transition ${
@@ -77,11 +102,34 @@ export default function TwitchStreamList() {
             }`}
             onClick={() => setSelectedTag(tag)}
           >
-            {tag}
+            {tag} ({count})
           </button>
         ))}
+
+        {/* Dropdown for others */}
+        {otherTags.length > 0 && (
+          <div className="relative group">
+            <button className="px-3 py-1 text-sm rounded-full border bg-black/70 text-white border-yellow-400 hover:bg-yellow-300 hover:text-black">
+              Other Tags
+            </button>
+            <div className="absolute left-0 mt-1 bg-black/80 border border-yellow-400 rounded shadow-lg hidden group-hover:block z-10 max-h-60 overflow-y-auto">
+              {otherTags.map(({ tag, count }) => (
+                <div
+                  key={tag}
+                  className={`px-4 py-1 text-sm cursor-pointer hover:bg-yellow-200 hover:text-black ${
+                    selectedTag === tag ? 'bg-yellow-400 text-black font-bold' : 'text-white'
+                  }`}
+                  onClick={() => setSelectedTag(tag)}
+                >
+                  {tag} ({count})
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
 
+      {/* Stream Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredStreams.map((stream) => {
           const isTop = stream.id === topStreamerId;
