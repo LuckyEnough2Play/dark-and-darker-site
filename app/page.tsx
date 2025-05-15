@@ -28,7 +28,7 @@ export default function Home() {
             <h2 className="text-3xl font-semibold text-gray-200 mb-2">
               A Dark and Darker Community Hub
             </h2>
-            <p className="text-sm text-gray-200 leading-relaxed mb-15">
+            <p className="text-sm text-gray-200 leading-relaxed mb-16">
               Discover player-built class guides, annotated patch reactions, and dungeon-tested survival tips — all forged in the depths of the Dark and Darker community.
             </p>
           </div>
