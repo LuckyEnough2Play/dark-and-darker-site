@@ -10,23 +10,10 @@ interface TwitchStream {
   language: string;
 }
 
-const FLAGS: Record<string, string> = {
-  en: '🇺🇸',
-  fr: '🇫🇷',
-  de: '🇩🇪',
-  es: '🇪🇸',
-  it: '🇮🇹',
-  pl: '🇵🇱',
-  ru: '🇷🇺',
-  tr: '🇹🇷',
-  ja: '🇯🇵',
-  ko: '🇰🇷',
-  zh: '🇨🇳',
-};
-
 export default function TwitchStreamList() {
   const [streams, setStreams] = useState<TwitchStream[]>([]);
-  const [selectedTag, setSelectedTag] = useState('All');
+  const [selectedLang, setSelectedLang] = useState('All');
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const fetchStreams = () => {
     fetch('/api/twitch/streams')
@@ -42,30 +29,23 @@ export default function TwitchStreamList() {
     return () => clearInterval(interval);
   }, []);
 
-  // Build tag frequencies from titles
-  const tagFrequency: Record<string, number> = {};
+  const langFrequency: Record<string, number> = {};
   streams.forEach((stream) => {
-    const words = stream.title.toLowerCase().split(/[\s\-_,.]+/);
-    words.forEach((word) => {
-      if (word.length > 2) {
-        tagFrequency[word] = (tagFrequency[word] || 0) + 1;
-      }
-    });
+    const lang = stream.language;
+    langFrequency[lang] = (langFrequency[lang] || 0) + 1;
   });
 
-  const sortedTags = Object.entries(tagFrequency)
+  const sortedLangs = Object.entries(langFrequency)
     .sort((a, b) => b[1] - a[1])
-    .map(([tag, count]) => ({ tag, count }));
+    .map(([lang, count]) => ({ lang, count }));
 
-  const topTags = sortedTags.slice(0, 3);
-  const otherTags = sortedTags.slice(3);
+  const topLangs = sortedLangs.slice(0, 3);
+  const otherLangs = sortedLangs.slice(3);
 
   const filteredStreams =
-    selectedTag === 'All'
+    selectedLang === 'All'
       ? streams
-      : streams.filter((stream) =>
-          stream.title.toLowerCase().includes(selectedTag.toLowerCase())
-        );
+      : streams.filter((stream) => stream.language === selectedLang);
 
   const topStreamerId = streams[0]?.id;
 
@@ -75,52 +55,59 @@ export default function TwitchStreamList() {
         Live Dark and Darker Streams
       </h2>
 
-      {/* Dynamic Tags */}
+      {/* Language Filters */}
       <div className="flex justify-center gap-2 mb-6 flex-wrap">
         <button
           className={`px-3 py-1 text-sm rounded-full border transition ${
-            selectedTag === 'All'
+            selectedLang === 'All'
               ? 'bg-yellow-400 text-black font-bold'
               : 'bg-black/70 text-white border-yellow-400 hover:bg-yellow-300 hover:text-black'
           }`}
-          onClick={() => setSelectedTag('All')}
+          onClick={() => setSelectedLang('All')}
         >
           All
         </button>
 
-        {topTags.map(({ tag, count }) => (
+        {topLangs.map(({ lang, count }) => (
           <button
-            key={tag}
+            key={lang}
             className={`px-3 py-1 text-sm rounded-full border transition ${
-              selectedTag === tag
+              selectedLang === lang
                 ? 'bg-yellow-400 text-black font-bold'
                 : 'bg-black/70 text-white border-yellow-400 hover:bg-yellow-300 hover:text-black'
             }`}
-            onClick={() => setSelectedTag(tag)}
+            onClick={() => setSelectedLang(lang)}
           >
-            {tag} ({count})
+            {lang.toUpperCase()} ({count})
           </button>
         ))}
 
-        {/* Dropdown for others */}
-        {otherTags.length > 0 && (
-          <div className="relative group">
-            <button className="px-3 py-1 text-sm rounded-full border bg-black/70 text-white border-yellow-400 hover:bg-yellow-300 hover:text-black">
-              Other Tags
+        {otherLangs.length > 0 && (
+          <div className="relative" onMouseLeave={() => setDropdownOpen(false)}>
+            <button
+              onClick={() => setDropdownOpen(!dropdownOpen)}
+              className="px-3 py-1 text-sm rounded-full border bg-black/70 text-white border-yellow-400 hover:bg-yellow-300 hover:text-black"
+            >
+              More Languages
             </button>
-            <div className="absolute left-0 mt-1 bg-black/80 border border-yellow-400 rounded shadow-lg hidden group-hover:block z-10 max-h-60 overflow-y-auto">
-              {otherTags.map(({ tag, count }) => (
-                <div
-                  key={tag}
-                  className={`px-4 py-1 text-sm cursor-pointer hover:bg-yellow-200 hover:text-black ${
-                    selectedTag === tag ? 'bg-yellow-400 text-black font-bold' : 'text-white'
-                  }`}
-                  onClick={() => setSelectedTag(tag)}
-                >
-                  {tag} ({count})
-                </div>
-              ))}
-            </div>
+            {dropdownOpen && (
+              <div className="absolute left-0 mt-1 bg-black/80 border border-yellow-400 rounded shadow-lg z-10 max-h-60 overflow-y-auto">
+                {otherLangs.map(({ lang, count }) => (
+                  <div
+                    key={lang}
+                    className={`px-4 py-1 text-sm cursor-pointer hover:bg-yellow-200 hover:text-black ${
+                      selectedLang === lang ? 'bg-yellow-400 text-black font-bold' : 'text-white'
+                    }`}
+                    onClick={() => {
+                      setSelectedLang(lang);
+                      setDropdownOpen(false);
+                    }}
+                  >
+                    {lang.toUpperCase()} ({count})
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         )}
       </div>
@@ -129,7 +116,6 @@ export default function TwitchStreamList() {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredStreams.map((stream) => {
           const isTop = stream.id === topStreamerId;
-          const lang = FLAGS[stream.language] || '🏳️';
 
           let badgeColor = 'bg-green-600';
           if (stream.viewer_count > 200) badgeColor = 'bg-yellow-500';
@@ -166,7 +152,7 @@ export default function TwitchStreamList() {
               <div className="p-3">
                 <div className="flex justify-between items-center">
                   <div className="text-white font-bold truncate">
-                    {lang} {stream.user_name}
+                    {stream.user_name}
                   </div>
                   <span className={`text-xs text-white px-2 py-1 rounded ${badgeColor}`}>
                     {stream.viewer_count} viewers
