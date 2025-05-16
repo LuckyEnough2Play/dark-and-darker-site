@@ -13,7 +13,6 @@ interface TwitchStream {
 export default function TwitchStreamList() {
   const [streams, setStreams] = useState<TwitchStream[]>([]);
   const [selectedLang, setSelectedLang] = useState('All');
-  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const fetchStreams = () => {
     fetch('/api/twitch/streams')
@@ -82,32 +81,27 @@ export default function TwitchStreamList() {
           </button>
         ))}
 
+        {/* Dropdown stays open on hover */}
         {otherLangs.length > 0 && (
-          <div className="relative" onMouseLeave={() => setDropdownOpen(false)}>
+          <div className="relative group">
             <button
-              onClick={() => setDropdownOpen(!dropdownOpen)}
               className="px-3 py-1 text-sm rounded-full border bg-black/70 text-white border-yellow-400 hover:bg-yellow-300 hover:text-black"
             >
               More Languages
             </button>
-            {dropdownOpen && (
-              <div className="absolute left-0 mt-1 bg-black/80 border border-yellow-400 rounded shadow-lg z-10 max-h-60 overflow-y-auto">
-                {otherLangs.map(({ lang, count }) => (
-                  <div
-                    key={lang}
-                    className={`px-4 py-1 text-sm cursor-pointer hover:bg-yellow-200 hover:text-black ${
-                      selectedLang === lang ? 'bg-yellow-400 text-black font-bold' : 'text-white'
-                    }`}
-                    onClick={() => {
-                      setSelectedLang(lang);
-                      setDropdownOpen(false);
-                    }}
-                  >
-                    {lang.toUpperCase()} ({count})
-                  </div>
-                ))}
-              </div>
-            )}
+            <div className="absolute left-0 mt-1 bg-black/80 border border-yellow-400 rounded shadow-lg hidden group-hover:block z-10 max-h-60 overflow-y-auto">
+              {otherLangs.map(({ lang, count }) => (
+                <div
+                  key={lang}
+                  className={`px-4 py-1 text-sm cursor-pointer hover:bg-yellow-200 hover:text-black ${
+                    selectedLang === lang ? 'bg-yellow-400 text-black font-bold' : 'text-white'
+                  }`}
+                  onClick={() => setSelectedLang(lang)}
+                >
+                  {lang.toUpperCase()} ({count})
+                </div>
+              ))}
+            </div>
           </div>
         )}
       </div>
