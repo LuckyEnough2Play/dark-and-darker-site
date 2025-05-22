@@ -1,0 +1,44 @@
+name: Generate Journal Summary
+
+on:
+  schedule:
+    - cron: '0 4 * * *'  # Every day at midnight EST (4 AM UTC)
+  workflow_dispatch:
+
+jobs:
+  generate-summary:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write  # ✅ Required to push commits
+
+    steps:
+      - name: ⬇️ Checkout Repo
+        uses: actions/checkout@v3
+
+      - name: 🟢 Set Up Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: 📦 Install Dependencies
+        run: npm ci
+
+      - name: 🤖 Generate Journal Entry
+        run: node scripts/generateJournal.js
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          REDDIT_CLIENT_ID: ${{ secrets.REDDIT_CLIENT_ID }}
+          REDDIT_CLIENT_SECRET: ${{ secrets.REDDIT_CLIENT_SECRET }}
+          REDDIT_USERNAME: ${{ secrets.REDDIT_USERNAME }}
+          REDDIT_PASSWORD: ${{ secrets.REDDIT_PASSWORD }}
+
+      - name: ✅ Commit and Push Changes
+        run: |
+          git config --global user.name "GPT Bot"
+          git config --global user.email "gpt-bot@luckandloot.gg"
+          git add app/journal/summaries/*.tsx
+          git add data/journal-summaries.json
+          git add app/journal/summaryMap.ts
+          git commit -m "chore: add daily journal summary" || echo "No changes to commit"
+          git push
