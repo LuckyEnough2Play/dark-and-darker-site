@@ -1,6 +1,8 @@
+// app/patch-notes/page.tsx
 'use client';
 import Navbar from '../../components/Navbar';
-import Patch851 from './patches/patch_851'; // ✅ Top patch
+import Patch86 from './patches/patch_86';     // 🆕 New top patch
+import Patch851 from './patches/patch_851';
 import Patch85 from './patches/patch_85';
 import Patch841 from './patches/patch_841';
 
@@ -18,7 +20,8 @@ export default function PatchNotesPage() {
             Dark and Darker Patch Log
           </h1>
           <div className="flex flex-col gap-16">
-            <Patch851 /> {/* 🆕 Most recent patch at the top */}
+            <Patch86 />   {/* 🆕 Most recent patch at the top */}
+            <Patch851 />
             <Patch85 />
             <Patch841 />
           </div>
