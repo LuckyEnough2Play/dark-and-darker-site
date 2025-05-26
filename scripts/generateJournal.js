@@ -122,34 +122,59 @@ function getSystemPrompt(tone) {
   return prompts[tone] || prompts['lorekeeper'];
 }
 
+function loadRecentJournalSummaries(limit = 3) {
+  const summariesDir = path.join('app/journal/summaries');
+  const files = fs
+    .readdirSync(summariesDir)
+    .filter((f) => f.endsWith('Journal.tsx') && !f.includes('placeholder'))
+    .sort()
+    .reverse()
+    .slice(0, limit);
+
+  return files.map((filename) => {
+    const content = fs.readFileSync(path.join(summariesDir, filename), 'utf8');
+    const match = content.match(/summary={`([\s\S]*?)`}/);
+    return match?.[1]?.trim() || '';
+  });
+}
+
 async function generateSummary(posts) {
   const tone = detectTone(posts);
   const systemPrompt = getSystemPrompt(tone);
+  const recentSummaries = loadRecentJournalSummaries(3);
 
-  const messages = [
-    { role: 'system', content: systemPrompt },
-    {
+  const messages = [{ role: 'system', content: systemPrompt }];
+
+  if (recentSummaries.length) {
+    messages.push({
       role: 'user',
-      content: posts.flatMap((post) => {
-        const lines = [
-          `Title: ${post.title}`,
-          post.selftext,
-        ].filter(Boolean);
+      content:
+        `Here are the last ${recentSummaries.length} journal entries. Do not repeat them or mimic their structure:\n\n` +
+        recentSummaries.map((s, i) => `Entry ${i + 1}:\n${s}`).join('\n\n'),
+    });
+  }
 
-        if (post.comments.length) {
-          lines.push(`Top Comments:`);
-          post.comments.forEach((c) => lines.push(`  - ${c}`));
-        }
+  messages.push({
+    role: 'user',
+    content: posts.flatMap((post) => {
+      const lines = [
+        `Title: ${post.title}`,
+        post.selftext,
+      ].filter(Boolean);
 
-        const textBlock = lines.join('\n');
-        const imageBlock = post.image
-          ? [{ type: 'image_url', image_url: { url: post.image } }]
-          : [];
+      if (post.comments.length) {
+        lines.push(`Top Comments:`);
+        post.comments.forEach((c) => lines.push(`  - ${c}`));
+      }
 
-        return [{ type: 'text', text: textBlock }, ...imageBlock];
-      }),
-    },
-  ];
+      const textBlock = lines.join('\n');
+      const imageBlock = post.image
+        ? [{ type: 'image_url', image_url: { url: post.image } }]
+        : [];
+
+      return [{ type: 'text', text: textBlock }, ...imageBlock];
+    }),
+  });
 
   const result = await openai.chat.completions.create({
     model: 'gpt-4o',
