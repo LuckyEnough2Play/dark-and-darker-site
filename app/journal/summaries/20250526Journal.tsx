@@ -6,21 +6,23 @@ export default function Journal_20250526() {
   return (
     <RedditSummary
       title="Journal Entry – Mon May 26 2025"
-      summary={`Ah, brave adventurers of the Dark and Darker realm, gather 'round for tales of woe and wonder!
+      summary={`In the ongoing saga of "Dark and Darker," a storm brews as the developers decide to remove solo and duo modes, consolidating players into trio-only queues. This decision has sparked a fervor among the community, with many players expressing their dissatisfaction and concerns about the game's future.
 
-First, we have a tale of betrayal and bewilderment: a loyal supporter, feeling scammed after Ironmace's migration mishap, cries injustice! The merchants of Discord failed to notify them properly, leaving them without their treasured game. The crowd rallies, demanding restitution and Steam keys, lamenting Ironmace's support as a ruinous opponent in reputation.
+### Community Sentiment:
 
-Next, a whimsical story surfaces: incantations spoken aloud bring magical might! A community laughs as players chant spells in Latin, reminiscing about the hilarity and chaos of live role-playing battles.
+1. **Opposition to Removal**: A significant portion of the player base strongly opposes the removal of solo and duo modes, fearing it will alienate players who prefer or rely on these options. Many believe this move could "kill the game," as solos and duos offer a different, often more relaxed experience compared to trio play.
 
-Then, witness the triumph of an old boomer! Proudly displaying a hoard worth 383 gold, the community welcomes another into the addictive embrace of loot and glory, encouraging reckless gambling with the goblin traders.
+2. **Concerns About Player Experience**: Players worry about being forced into trio queues, citing challenges like poor team dynamics, loot disputes, and the pressure of playing with strangers. Many prefer the autonomy and control of solo play, where they can engage at their own pace and skill level.
 
-In darker news, players express frustration with Ironmace's direction. SDF’s cryptic messages tease a return to the original vision, leaving many skeptical yet hopeful for change. Communication woes persist, with calls for in-game updates to enlighten the masses without the need for endless Discord delves.
+3. **Developer Vision vs. Player Desire**: The community perceives a disconnect between the developers’ vision and player desires. Many feel that the developers are pushing changes that do not align with the majority's preferences, leading to frustration and a sense of being unheard.
 
-Among the chaos, a noble deed shines: a player spares a struggling squire, proving that kindness can prevail in the dungeon's depths. Encouragement flows as players urge cooperation and camaraderie, despite the ruthless environment.
+4. **Impact on New Players**: There is concern that the removal of solo mode will deter new players who may find trio play overwhelming or intimidating. Solo play is often seen as a gateway for newcomers to learn the game at their own pace.
 
-Lastly, a newcomer questions the daunting solo HR journey, feeling overwhelmed by the challenges. Veterans offer guidance, suggesting cautious exploration and profit-making tactics to ease the fearsome path forward.
+5. **Potential Game Decline**: Some players predict a decline in the game's popularity and player base if the changes proceed. The uncertainty and constant shifts in game mechanics add to the dissatisfaction, with some long-term players considering leaving the game.
 
-These tales of turmoil and triumph reflect the ever-evolving dance of strategy and survival. May your ventures be prosperous, and your loot ever abundant!`}
+6. **Hope for Reconsideration**: Despite the backlash, there remains a hope that the developers will reconsider their approach, possibly finding a middle ground that maintains solo and duo experiences while addressing matchmaking concerns.
+
+Overall, the community's response highlights a critical moment for "Dark and Darker," with the potential to shape its future trajectory based on how these concerns are addressed.`}
     />
   );
 }
