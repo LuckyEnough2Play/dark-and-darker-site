@@ -55,8 +55,8 @@ async function fetchComments(permalink, token) {
   return comments || [];
 }
 
-async function fetchRedditTopPosts(time, token) {
-  const res = await fetch(`https://oauth.reddit.com/r/DarkAndDarker/top.json?t=${time}&limit=3`, {
+async function fetchTopTodayPosts(limit, token) {
+  const res = await fetch(`https://oauth.reddit.com/r/DarkAndDarker/top.json?t=day&limit=${limit}`, {
     headers: {
       Authorization: `Bearer ${token}`,
       'User-Agent': 'LuckAndLootBot/1.0 by LuckyEnough4U',
@@ -134,7 +134,7 @@ async function generateSummary(posts) {
         const lines = [
           `Title: ${post.title}`,
           post.selftext,
-        ].filter(Boolean); // removes empty values like blank body
+        ].filter(Boolean);
 
         if (post.comments.length) {
           lines.push(`Top Comments:`);
@@ -161,7 +161,6 @@ async function generateSummary(posts) {
   return { summary: text.trim() };
 }
 
-
 function generateSummaryMapFile(filenames) {
   const lines = [];
   const header = `// AUTO-GENERATED FILE — DO NOT EDIT MANUALLY\n'use client';\nimport dynamic from 'next/dynamic';\n`;
@@ -187,12 +186,7 @@ function generateSummaryMapFile(filenames) {
 const run = async () => {
   try {
     const token = await getRedditAccessToken();
-
-    const posts = [
-      ...(await fetchRedditTopPosts('month', token)),
-      ...(await fetchRedditTopPosts('week', token)),
-      ...(await fetchRedditTopPosts('day', token)),
-    ];
+    const posts = await fetchTopTodayPosts(9, token);
 
     const { summary } = await generateSummary(posts);
 
