@@ -12,10 +12,10 @@ const handler = NextAuth({
   callbacks: {
     async session({ session, token }) {
       if (token && session.user) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         (session.user as any).id = token.sub!;
-session.user.name = token.name!;
-session.user.image = token.picture!;
-
+        session.user.name = token.name!;
+        session.user.image = token.picture!;
       }
       return session;
     },
