@@ -1,5 +1,4 @@
-// next-auth.d.ts
-import NextAuth from "next-auth";
+// /app/next-auth.d.ts
 
 declare module "next-auth" {
   interface Session {
@@ -15,4 +14,3 @@ declare module "next-auth" {
     id: string;
   }
 }
-
