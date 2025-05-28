@@ -1,6 +1,6 @@
-// app/patch-notes/page.tsx
+// /app/patch-notes/page.tsx
 'use client';
-import Navbar from '../../components/Navbar';
+
 import Patch86 from './patches/patch_86';
 import Patch851 from './patches/patch_851';
 import Patch85 from './patches/patch_85';
@@ -11,8 +11,6 @@ export default function PatchNotesPage() {
     <div className="relative min-h-screen text-white">
       {/* Fixed background layer */}
       <div className="fixed inset-0 -z-10 bg-[url('/wallpaper_patchnotes.png')] bg-center bg-cover bg-no-repeat" />
-
-      <Navbar />
 
       <div className="flex flex-col items-center justify-start min-h-[calc(100vh-6rem)] px-4 sm:px-6 md:px-10 py-10">
         <div className="w-full max-w-6xl">

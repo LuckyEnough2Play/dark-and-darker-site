@@ -1,5 +1,4 @@
 'use client';
-import Navbar from '../components/Navbar';
 import TwitchStreamList from '../components/TwitchStreamList';
 
 export default function Home() {
@@ -11,8 +10,6 @@ export default function Home() {
         alt="Background"
         className="fixed inset-0 -z-10 w-screen h-screen object-cover"
       />
-
-      <Navbar />
 
       <div className="w-full max-w-screen-xl mx-auto px-4 pb-16">
         {/* Title */}
