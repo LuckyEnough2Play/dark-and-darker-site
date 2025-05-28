@@ -1,5 +1,6 @@
-import NextAuth from 'next-auth';
-import DiscordProvider from 'next-auth/providers/discord';
+// /app/api/auth/[...nextauth]/route.ts
+import NextAuth from "next-auth/next";
+import DiscordProvider from "next-auth/providers/discord";
 
 const handler = NextAuth({
   providers: [
@@ -8,20 +9,17 @@ const handler = NextAuth({
       clientSecret: process.env.DISCORD_CLIENT_SECRET!,
     }),
   ],
-callbacks: {
-  async session({ session, token }) {
-    if (token && session.user) {
-      session.user = {
-        ...session.user,
-        id: token.sub!,
-        image: token.picture!,
-        name: token.name!,
-      };
-    }
-    return session;
-  },
-},
+  callbacks: {
+    async session({ session, token }) {
+      if (token && session.user) {
+        (session.user as any).id = token.sub!;
+session.user.name = token.name!;
+session.user.image = token.picture!;
 
+      }
+      return session;
+    },
+  },
 });
 
 export { handler as GET, handler as POST };
