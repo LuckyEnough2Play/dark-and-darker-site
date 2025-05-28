@@ -1,7 +1,7 @@
-// app/journal/page.tsx
+// /app/journal/page.tsx
 'use client';
+
 import { useEffect, useState } from 'react';
-import Navbar from '../../components/Navbar';
 import dynamic from 'next/dynamic';
 import summaryMap from './summaryMap';
 
@@ -27,8 +27,6 @@ export default function JournalPage() {
         alt="Journal Background"
         className="fixed inset-0 -z-10 w-screen h-screen object-cover"
       />
-
-      <Navbar />
 
       <main className="max-w-7xl mx-auto px-4 py-10">
         <h1 className="text-4xl font-bold text-center text-yellow-300 drop-shadow mb-10">
