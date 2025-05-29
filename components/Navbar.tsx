@@ -12,6 +12,7 @@ export default function Navbar() {
     { href: '/', label: 'Home' },
     { href: '/patch-notes', label: 'Patch Notes' },
     { href: '/journal', label: 'Journal' },
+    { href: '/matchmaking', label: 'Matchmaking' },
     { href: '/beginner-guide', label: 'Beginner Guide' },
     { href: '/boss-guides', label: 'Boss Guides' },
     { href: '/team-combat', label: 'Team Combat' },
