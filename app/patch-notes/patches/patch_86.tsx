@@ -48,7 +48,7 @@ export default function Patch86() {
 This update also consolidates the matchmaking queues. The pools have been simplified into just a single pool each for Adventure, Normal, and HR modes. The continuous matchmaking system has improved our ability to help keep dungeons feeling populated. However, even with that system in place, the current population cannot sufficiently support the excessive amount of match types.
 
 The removal of the lower gear-score pools also symbolizes a return to the more brutal and hardcore roots for the PvP-enabled dungeons, where not every fight is supposed to be fair. In the same vein, Normal dungeons are now focused on trio parties. We are aware that the current item power gap pushes this brutality to the extreme and we will be working on a future overhaul to make the gap more reasonable. In the meantime, we will be considering ways to make it a bit easier to close that gap with the improved loot drop rates and enhancements to the gem socket system. We thank you and see you in the dungeons!`}
-      opinions={``}
+      opinions={`This is actually insane, I can't believe IM is taking 10 steps back when so much progress has been made. The community backlash is going to be immense. I don't understand why they would do this, it just seems like a terrible decision. The game was finally getting better and now this? It's like they want to lose players.`}
     />
   );
 }

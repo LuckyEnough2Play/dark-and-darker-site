@@ -2,6 +2,7 @@
 // force save
 'use client';
 
+import Patch861 from './patches/patch_861';
 import Patch86 from './patches/patch_86';
 import Patch851 from './patches/patch_851';
 import Patch85 from './patches/patch_85';
