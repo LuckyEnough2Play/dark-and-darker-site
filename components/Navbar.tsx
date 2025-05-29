@@ -1,4 +1,4 @@
-// /components/Navbar.tsx
+// File: /components/Navbar.tsx
 'use client';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -16,6 +16,7 @@ export default function Navbar() {
     { href: '/boss-guides', label: 'Boss Guides' },
     { href: '/team-combat', label: 'Team Combat' },
     { href: '/class-breakdowns', label: 'Class Builds' },
+    { href: '/about', label: 'About' }, // ✅ Added About tab
   ];
 
   return (
