@@ -19,7 +19,7 @@ export default function Patch861() {
       ]}
       comments={[]}
       summary={`A small but important hotfix to resolve several bugs, especially around spells, loot drops, and the death cam. Players in HR should also notice a reduction in Artifact item frequency. Downtime is expected to last around 2 hours, with a 40-minute window for current matches to wrap up safely. Server maintenance will affect login, matchmaking, and even the website during this period.`}
-      opinions={`Even after seeing the dumpster fire, Iron Mace doesn't care. It doesn't seem likely that they'll rever back the changes, and the community is not happy. Even if they did revert back, the damage is done.`}
+      opinions={`Even after seeing the dumpster fire, Iron Mace doesn't care. It doesn't seem likely that they'll never back the changes, and the community is not happy. Even if they did revert back, the damage is done.`}
     />
   );
 }

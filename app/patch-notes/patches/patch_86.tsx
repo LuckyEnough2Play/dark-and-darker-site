@@ -41,7 +41,7 @@ export default function Patch86() {
         "The boss trigger system has been removed. Boss trigger items can now be sold to merchants at a high price.",
       ]}
       comments={[
-        "",
+        "Good luck random queueing into a dungeon with a bunch of people who have no idea what they're doing. This is going to be a nightmare.",
       ]}
       summary={`This update introduces our community assisted enforcement system to help clean up the dungeons. Suspicious players that receive too many reports from highly reliable community enforcers will receive a temporary ‘Outlaw’ mark on their account. Outlaw accounts will be spotlighted for intense investigation by our anti-cheat team and eventually have modes and features restricted once this system is finalized. The best way for the community to help us improve this system is to continue sending accurate reports when encountering a cheater. 
 
