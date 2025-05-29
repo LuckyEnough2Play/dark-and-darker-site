@@ -8,14 +8,17 @@ export default function AboutPage() {
       <div className="fixed inset-0 -z-10 bg-[url('/wallpaper_about.png')] bg-center bg-cover bg-no-repeat" />
 
       <main className="flex items-center justify-center min-h-[calc(100vh-6rem)] px-6 py-16">
-        <div className="flex flex-col md:flex-row items-center gap-10 bg-black/60 p-8 rounded-xl shadow-lg max-w-5xl w-full border border-blue-700">
+        <div className="flex flex-col md:flex-row items-center gap-10 bg-black/60 p-8 rounded-xl shadow-lg max-w-5xl w-full border border-[#1D4ED8]">
           {/* Avatar */}
-          <div className="flex-shrink-0">
+          <div className="flex-shrink-0 relative">
             <img
-              src="/avatar_luckenough.jpg"
-              alt="Site Creator"
-              className="w-40 h-40 rounded-full border-4 border-blue-700 shadow-md object-cover"
+              src="/avatar_luckyenough.jpg"
+              alt="Creator"
+              className="w-40 h-40 rounded-full border-4 border-[#1D4ED8] object-cover shadow-md"
             />
+            <p className="absolute bottom-[-1.5rem] left-1/2 -translate-x-1/2 text-sm text-gray-300">
+              Creator
+            </p>
           </div>
 
           {/* Bio box */}
