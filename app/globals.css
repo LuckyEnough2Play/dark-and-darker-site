@@ -1,3 +1,5 @@
+/* File: /app/globals.css */
+
 @import "tailwindcss";
 
 :root {
@@ -19,37 +21,50 @@
   }
 }
 
-/* Prevent layout shift caused by scrollbars and fill gutter with black */
 html {
   scrollbar-gutter: stable both-edges;
   overflow-y: scroll;
-  background-color: black; /* ← This fills the left/right reserved gutter space */
+  background-color: black;
 }
 
-/* Base styles */
 body {
-  background: transparent; /* Let page backgrounds show through */
+  background: transparent;
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
 
-/* Custom scrollbar for WebKit */
 body::-webkit-scrollbar {
   width: 10px;
 }
-
 body::-webkit-scrollbar-track {
   background: black;
 }
-
 body::-webkit-scrollbar-thumb {
-  background-color: #fde68a; /* Tailwind yellow-200 */
+  background-color: #fde68a;
   border-radius: 6px;
   border: 2px solid rgba(0, 0, 0, 0.4);
 }
-
-/* Firefox support */
 * {
   scrollbar-width: thin;
   scrollbar-color: #fde68a black;
+}
+
+/* 💡 Flickering border glow */
+@keyframes flicker {
+  0%, 100% {
+    box-shadow: 0 0 0px #1D4ED8;
+  }
+  30% {
+    box-shadow: 0 0 6px #1D4ED8;
+  }
+  50% {
+    box-shadow: 0 0 14px #1D4ED8;
+  }
+  70% {
+    box-shadow: 0 0 4px #1D4ED8;
+  }
+}
+
+.animate-flicker {
+  animation: flicker 2.5s ease-in-out infinite;
 }

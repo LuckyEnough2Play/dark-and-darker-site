@@ -8,22 +8,22 @@ export default function AboutPage() {
       <div className="fixed inset-0 -z-10 bg-[url('/wallpaper_about.png')] bg-center bg-cover bg-no-repeat" />
 
       <main className="flex items-center justify-center min-h-[calc(100vh-6rem)] px-6 py-16">
-        <div className="flex flex-col md:flex-row items-start gap-10 bg-black/60 p-8 rounded-xl shadow-lg max-w-5xl w-full border border-[#1D4ED8]">
-          {/* Avatar (top-left) */}
-          <div className="flex-shrink-0 relative">
+        <div className="relative flex flex-col md:flex-row items-start gap-6 max-w-5xl w-full">
+          {/* Avatar floating to the left */}
+          <div className="relative -ml-4 md:-ml-20 mt-2">
             <img
               src="/avatar_luckyenough.jpg"
               alt="Creator"
-              className="w-40 h-40 rounded-full border-2 border-[#1D4ED8] object-cover object-top shadow-md"
+              className="w-40 h-40 rounded-full border-4 border-[#1D4ED8] object-cover object-top shadow-md"
             />
-            <p className="absolute bottom-[-1.5rem] left-1/2 -translate-x-1/2 text-sm text-gray-300">
-              <strong>LuckyEnough</strong>
+            <p className="absolute w-full text-center top-[105%] text-sm text-gray-300 font-semibold">
+              LuckyEnough
             </p>
           </div>
 
           {/* Bio box */}
-          <div className="text-left max-w-xl">
-            <h1 className="text-3xl font-bold mb-4 text-yellow-300">About Luck and Loot</h1>
+          <div className="bg-black/60 p-6 rounded-xl shadow-lg w-full border border-[#1D4ED8] animate-flicker">
+            <h1 className="text-3xl font-bold mb-4 text-yellow-300 text-center">About Luck and Loot</h1>
             <div className="text-lg leading-relaxed text-gray-200 space-y-4">
               <p>
                 <em>Luck and Loot</em> is a passion project born from a lifelong obsession with medieval fantasy and a deep love for <em>Dark and Darker</em>. Ever since I was a kid, I’ve been captivated by knights, castles, weapons, and magic — the world of swords and sorcery has always felt like home. Video games were my portal: <em>Stronghold</em>, <em>The Bard’s Tale</em>, <em>Total War</em>, <em>Age of Mythology</em>, and of course, thousands of hours in <em>Runescape</em>.
