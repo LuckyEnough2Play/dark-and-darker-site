@@ -1,5 +1,4 @@
-// /app/patch-notes/page.tsx
-// force save
+// File: /app/patch-notes/page.tsx
 'use client';
 
 import Patch861 from './patches/patch_861';
@@ -20,6 +19,7 @@ export default function PatchNotesPage() {
             Dark and Darker Patch Log
           </h1>
           <div className="flex flex-col gap-12 sm:gap-16">
+            <Patch861 /> {/* ✅ Newly added hotfix */}
             <Patch86 />
             <Patch851 />
             <Patch85 />
