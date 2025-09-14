@@ -2,6 +2,7 @@
 'use client';
 import dynamic from 'next/dynamic';
 
+const Journal_20250914 = dynamic(() => import('./summaries/20250914Journal'));
 const Journal_20250913 = dynamic(() => import('./summaries/20250913Journal'));
 const Journal_20250912 = dynamic(() => import('./summaries/20250912Journal'));
 const Journal_20250911 = dynamic(() => import('./summaries/20250911Journal'));
@@ -120,6 +121,7 @@ const Journal_20250521 = dynamic(() => import('./summaries/20250521Journal'));
 const Journal_20250520 = dynamic(() => import('./summaries/20250520Journal'));
 
 const summaryMap: Record<string, React.ComponentType> = {
+  "20250914Journal.tsx": Journal_20250914,
   "20250913Journal.tsx": Journal_20250913,
   "20250912Journal.tsx": Journal_20250912,
   "20250911Journal.tsx": Journal_20250911,
